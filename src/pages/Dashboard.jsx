@@ -4,9 +4,12 @@ import Toolbar from "../components/search/Toolbar";
 import UserTable from "../components/table/UserTable";
 import Pagination from "../components/pagination/Pagination";
 import useUsers from "../hooks/useUsers";
+import UserModal from "../components/modal/UserModal";
 
 function Dashboard() {
     const [searchTerm, setSearchTerm] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
     const { users, loading, error } = useUsers();
 
     const filteredUsers = users.filter((user) => {
@@ -17,10 +20,6 @@ function Dashboard() {
         const department = "IT";
 
         const query = searchTerm.toLowerCase();
-
-        const [isModalOpen, setIsModalOpen] = useState(false);
-
-        const [selectedUser, setSelectedUser] = useState(null);
 
         return(
             firstName.toLowerCase().includes(query) ||
@@ -49,6 +48,11 @@ function Dashboard() {
                     error={error}
                 />
                 <Pagination />
+
+                <UserModal
+                  isOpen={isModalOpen}
+                  onClose={() => setIsModalOpen(false)}
+                />
             </main>
         </div>
     );
