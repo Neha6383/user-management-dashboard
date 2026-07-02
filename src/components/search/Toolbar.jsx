@@ -1,10 +1,10 @@
-function Toolbar({ searchterm, setSearchTerm, onAddUser }) {
+function Toolbar({ searchTerm, setSearchTerm, onAddUser }) {
     return(
         <div className="flex flex-col gap-4 rounded-lg bg-white p-4 shadow md:flex-row md:items-center md:justify-between">
             <input 
             type="text"
             placeholder="Search users..."
-            value={searchterm}
+            value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-blue-500 md:w-80"
             />
