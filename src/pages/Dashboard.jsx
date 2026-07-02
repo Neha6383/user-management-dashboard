@@ -20,11 +20,15 @@ function Dashboard() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  const [sortField, setSortField] = useState("id");
+const [sortOrder, setSortOrder] = useState("asc");
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const filteredUsers = users.filter((user) => {
+  const filteredUsers = users
+  .filter((user) => {
     const firstName =
       user.firstName || user.name?.split(" ")[0] || "";
 
@@ -43,6 +47,51 @@ function Dashboard() {
       user.email.toLowerCase().includes(query) ||
       department.toLowerCase().includes(query)
     );
+  })
+  .sort((a, b) => {
+    let valueA;
+    let valueB;
+
+    switch (sortField) {
+      case "firstName":
+        valueA = a.firstName || a.name?.split(" ")[0] || "";
+        valueB = b.firstName || b.name?.split(" ")[0] || "";
+        break;
+
+      case "lastName":
+        valueA =
+          a.lastName || a.name?.split(" ").slice(1).join(" ") || "";
+        valueB =
+          b.lastName || b.name?.split(" ").slice(1).join(" ") || "";
+        break;
+
+      case "email":
+        valueA = a.email;
+        valueB = b.email;
+        break;
+
+      case "department":
+        valueA = a.department || "IT";
+        valueB = b.department || "IT";
+        break;
+
+      default:
+        valueA = a.id;
+        valueB = b.id;
+    }
+
+    if (typeof valueA === "string") {
+      valueA = valueA.toLowerCase();
+      valueB = valueB.toLowerCase();
+    }
+
+    if (valueA < valueB)
+      return sortOrder === "asc" ? -1 : 1;
+
+    if (valueA > valueB)
+      return sortOrder === "asc" ? 1 : -1;
+
+    return 0;
   });
 
   return (
@@ -52,13 +101,17 @@ function Dashboard() {
       <main className="mx-auto flex max-w-7xl flex-col gap-6 p-6">
 
         <Toolbar
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          onAddUser={() => {
-            setSelectedUser(null);
-            setIsModalOpen(true);
-          }}
-        />
+  searchTerm={searchTerm}
+  setSearchTerm={setSearchTerm}
+  sortField={sortField}
+  setSortField={setSortField}
+  sortOrder={sortOrder}
+  setSortOrder={setSortOrder}
+  onAddUser={() => {
+    setSelectedUser(null);
+    setIsModalOpen(true);
+  }}
+/>
 
         <UserTable
           users={filteredUsers}
