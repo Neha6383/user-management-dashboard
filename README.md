@@ -10,6 +10,20 @@ https://user-management-dashboard-five-beta.vercel.app/
 
 ---
 
+## Screenshots
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Add User
+
+![Add User](screenshots/add-user.png)
+
+### Filter Users
+
+![Filter Users](screenshots/filter-modal.png)
+
 ## GitHub Repository
 
 https://github.com/Neha6383/user-management-dashboard
