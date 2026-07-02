@@ -1,16 +1,164 @@
-# React + Vite
+# User Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive User Management Dashboard built with React, Vite, Tailwind CSS, Axios, React Hook Form, and Zod. The application allows users to view, add, edit, delete, search, sort, filter, and paginate user records using the JSONPlaceholder REST API.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+https://user-management-dashboard-five-beta.vercel.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## GitHub Repository
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+https://github.com/Neha6383/user-management-dashboard
+
+---
+
+## Features
+
+- View users from JSONPlaceholder API
+- Add new users
+- Edit existing users
+- Delete users
+- Search by first name, last name, email, or department
+- Filter users
+- Sort users
+- Pagination (10, 25, 50, 100 records)
+- Client-side form validation using Zod
+- Responsive UI
+- Error handling
+- Success notifications
+
+---
+
+## Tech Stack
+
+### Frontend
+- React 19
+- Vite
+- Tailwind CSS
+
+### Form Handling
+- React Hook Form
+- Zod
+
+### HTTP Client
+- Axios
+
+### Deployment
+- Vercel
+
+---
+
+## Folder Structure
+
+```
+src/
+│
+├── api/
+├── components/
+│   ├── common/
+│   ├── filter/
+│   ├── layout/
+│   ├── modal/
+│   ├── pagination/
+│   ├── search/
+│   └── table/
+│
+├── constants/
+├── hooks/
+├── pages/
+├── schemas/
+├── services/
+└── utils/
+```
+
+---
+
+## Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Neha6383/user-management-dashboard.git
+```
+
+Navigate into the project
+
+```bash
+cd user-management-dashboard
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start the development server
+
+```bash
+npm run dev
+```
+
+Build for production
+
+```bash
+npm run build
+```
+
+---
+
+## API Used
+
+JSONPlaceholder
+
+https://jsonplaceholder.typicode.com/users
+
+---
+
+## Validation
+
+The application uses **Zod** with **React Hook Form** to validate:
+
+- First Name
+- Last Name
+- Email
+- Department
+
+---
+
+## Assumptions
+
+- JSONPlaceholder simulates Create, Update, and Delete operations.
+- Since the API does not permanently store data, newly added or edited users disappear after refreshing the page.
+- Pagination is implemented on the client side.
+
+---
+
+## Challenges Faced
+
+- Handling JSONPlaceholder's mock CRUD behavior.
+- Managing different data formats between API users and newly created users.
+- Combining search, filtering, sorting, and pagination without conflicts.
+- Building reusable and modular React components.
+
+---
+
+## Future Improvements
+
+- Backend integration with persistent storage.
+- Authentication and authorization.
+- Server-side pagination.
+- Advanced filtering.
+- User profile page.
+- Dark mode.
+- Export users to CSV/PDF.
+
+---
+
+## Author
+
+Neha
