@@ -5,7 +5,7 @@ import Toolbar from "../components/search/Toolbar";
 import UserTable from "../components/table/UserTable";
 import Pagination from "../components/pagination/Pagination";
 import UserModal from "../components/modal/UserModal";
-
+import FilterModal from "../components/filter/FilterModal";
 import useUsers from "../hooks/useUsers";
 
 function Dashboard() {
@@ -22,6 +22,15 @@ function Dashboard() {
 
   const [sortField, setSortField] = useState("id");
 const [sortOrder, setSortOrder] = useState("asc");
+
+const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+const [filters, setFilters] = useState({
+  firstName: "",
+  lastName: "",
+  email: "",
+  department: "",
+});
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,11 +51,15 @@ const [sortOrder, setSortOrder] = useState("asc");
     const query = searchTerm.toLowerCase();
 
     return (
-      firstName.toLowerCase().includes(query) ||
-      lastName.toLowerCase().includes(query) ||
-      user.email.toLowerCase().includes(query) ||
-      department.toLowerCase().includes(query)
-    );
+  firstName.toLowerCase().includes(query) &&
+  firstName.toLowerCase().includes(filters.firstName.toLowerCase()) &&
+
+  lastName.toLowerCase().includes(filters.lastName.toLowerCase()) &&
+
+  user.email.toLowerCase().includes(filters.email.toLowerCase()) &&
+
+  department.toLowerCase().includes(filters.department.toLowerCase())
+);
   })
   .sort((a, b) => {
     let valueA;
@@ -111,6 +124,7 @@ const [sortOrder, setSortOrder] = useState("asc");
     setSelectedUser(null);
     setIsModalOpen(true);
   }}
+  onFilter={() => setIsFilterOpen(true)}
 />
 
         <UserTable
@@ -136,6 +150,13 @@ const [sortOrder, setSortOrder] = useState("asc");
           addUser={addUser}
           updateUser={updateUser}
         />
+
+        <FilterModal
+  isOpen={isFilterOpen}
+  onClose={() => setIsFilterOpen(false)}
+  filters={filters}
+  setFilters={setFilters}
+/>
 
       </main>
     </div>
