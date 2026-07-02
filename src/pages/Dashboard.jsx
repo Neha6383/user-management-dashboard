@@ -18,6 +18,10 @@ function Dashboard() {
 
         const query = searchTerm.toLowerCase();
 
+        const [isModalOpen, setIsModalOpen] = useState(false);
+
+        const [selectedUser, setSelectedUser] = useState(null);
+
         return(
             firstName.toLowerCase().includes(query) ||
             lastName.toLowerCase().includes(query) ||
@@ -34,6 +38,10 @@ function Dashboard() {
                 <Toolbar 
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
+                    onAddUser={() => {
+                        setSelectedUser(null);
+                        setIsModalOpen(true);
+                    }}
                 />
                 <UserTable 
                     users={filteredUsers}

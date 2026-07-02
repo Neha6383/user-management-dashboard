@@ -1,4 +1,4 @@
-function Toolbar({ searchterm, setSearchTerm }) {
+function Toolbar({ searchterm, setSearchTerm, onAddUser }) {
     return(
         <div className="flex flex-col gap-4 rounded-lg bg-white p-4 shadow md:flex-row md:items-center md:justify-between">
             <input 
@@ -13,7 +13,9 @@ function Toolbar({ searchterm, setSearchTerm }) {
                 <button className="rounded-lg bg-gray-200 px-4 py-2 hover:bg-gray-300">
                     Filter
                 </button>
-                <button className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+                <button className="rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+                onClick={onAddUser}
+                >
                     Add User
                 </button>
             </div>
