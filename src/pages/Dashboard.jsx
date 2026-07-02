@@ -25,6 +25,9 @@ const [sortOrder, setSortOrder] = useState("asc");
 
 const [isFilterOpen, setIsFilterOpen] = useState(false);
 
+const [currentPage, setCurrentPage] = useState(1);
+const [pageSize, setPageSize] = useState(10);
+
 const [filters, setFilters] = useState({
   firstName: "",
   lastName: "",
@@ -127,8 +130,15 @@ const [filters, setFilters] = useState({
   onFilter={() => setIsFilterOpen(true)}
 />
 
+const startIndex = (currentPage - 1) * pageSize;
+
+const paginatedUsers = filteredUsers.slice(
+  startIndex,
+  startIndex + pageSize
+);
+
         <UserTable
-          users={filteredUsers}
+          users={paginatedUsers}
           loading={loading}
           error={error}
           onEdit={(user) => {
@@ -138,7 +148,13 @@ const [filters, setFilters] = useState({
           onDelete={deleteUser}
         />
 
-        <Pagination />
+        <Pagination
+  currentPage={currentPage}
+  setCurrentPage={setCurrentPage}
+  pageSize={pageSize}
+  setPageSize={setPageSize}
+  totalUsers={filteredUsers.length}
+/>
 
         <UserModal
           isOpen={isModalOpen}
