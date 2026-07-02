@@ -53,16 +53,19 @@ const [filters, setFilters] = useState({
 
     const query = searchTerm.toLowerCase();
 
-    return (
-  firstName.toLowerCase().includes(query) &&
+    const matchesSearch =
+  firstName.toLowerCase().includes(query) ||
+  lastName.toLowerCase().includes(query) ||
+  user.email.toLowerCase().includes(query) ||
+  department.toLowerCase().includes(query);
+
+const matchesFilters =
   firstName.toLowerCase().includes(filters.firstName.toLowerCase()) &&
-
   lastName.toLowerCase().includes(filters.lastName.toLowerCase()) &&
-
   user.email.toLowerCase().includes(filters.email.toLowerCase()) &&
+  department.toLowerCase().includes(filters.department.toLowerCase());
 
-  department.toLowerCase().includes(filters.department.toLowerCase())
-);
+return matchesSearch && matchesFilters;
   })
   .sort((a, b) => {
     let valueA;
@@ -110,6 +113,13 @@ const [filters, setFilters] = useState({
     return 0;
   });
 
+  const startIndex = (currentPage - 1) * pageSize;
+
+const paginatedUsers = filteredUsers.slice(
+  startIndex,
+  startIndex + pageSize
+);
+
   return (
     <div className="min-h-screen bg-slate-100">
       <Header />
@@ -129,13 +139,6 @@ const [filters, setFilters] = useState({
   }}
   onFilter={() => setIsFilterOpen(true)}
 />
-
-const startIndex = (currentPage - 1) * pageSize;
-
-const paginatedUsers = filteredUsers.slice(
-  startIndex,
-  startIndex + pageSize
-);
 
         <UserTable
           users={paginatedUsers}

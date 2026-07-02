@@ -94,12 +94,20 @@ function UserTable({
                     </button>
 
                     <button
-                      onClick={() => onDelete(user.id)}
-                      className="text-red-600 hover:text-red-800"
-                      title="Delete User"
-                    >
-                      <FaTrash />
-                    </button>
+  onClick={() => {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete ${firstName} ${lastName}?`
+    );
+
+    if (confirmDelete) {
+      onDelete(user.id);
+    }
+  }}
+  className="text-red-600 hover:text-red-800"
+  title="Delete User"
+>
+  <FaTrash />
+</button>
                   </div>
                 </td>
               </tr>
