@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import {
   getUsers,
-  addUser as addUserApi,
-  updateUser as updateUserApi,
-  deleteUser as deleteUserApi,
+  createUser,
+  editUser,
+  removeUser,
 } from "../services/userService";
 
 function useUsers() {
@@ -18,9 +18,7 @@ function useUsers() {
   async function fetchUsers() {
     try {
       setLoading(true);
-
       const data = await getUsers();
-
       setUsers(data);
     } catch (err) {
       setError("Failed to fetch users.");
@@ -31,14 +29,14 @@ function useUsers() {
 
   async function addUser(user) {
     try {
-      const createdUser = await addUserApi(user);
+      const createdUser = await createUser(user);
 
       const newUser = {
-        ...user,
         id: createdUser.id || Date.now(),
+        ...user,
       };
 
-      setUsers((prev) => [...prev, newUser]);
+      setUsers((prev) => [newUser, ...prev]);
 
       return true;
     } catch (err) {
@@ -49,11 +47,13 @@ function useUsers() {
 
   async function updateUser(id, updatedUser) {
     try {
-      await updateUserApi(id, updatedUser);
+      await editUser(id, updatedUser);
 
       setUsers((prev) =>
         prev.map((user) =>
-          user.id === id ? { ...updatedUser, id } : user
+          user.id === id
+            ? { ...user, ...updatedUser }
+            : user
         )
       );
 
@@ -66,7 +66,7 @@ function useUsers() {
 
   async function deleteUser(id) {
     try {
-      await deleteUserApi(id);
+      await removeUser(id);
 
       setUsers((prev) =>
         prev.filter((user) => user.id !== id)
@@ -83,7 +83,6 @@ function useUsers() {
     users,
     loading,
     error,
-
     addUser,
     updateUser,
     deleteUser,

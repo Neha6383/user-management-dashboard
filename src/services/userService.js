@@ -5,16 +5,16 @@ export const getUsers = async () => {
   return response.data;
 };
 
-export const addUser = async (user) => {
+export const createUser = async (user) => {
   const response = await api.post("/users", user);
   return response.data;
 };
 
-export const updateUser = async (id, user) => {
+export const editUser = async (id, user) => {
   const response = await api.put(`/users/${id}`, user);
   return response.data;
 };
 
-export const deleteUser = async (id) => {
+export const removeUser = async (id) => {
   await api.delete(`/users/${id}`);
 };

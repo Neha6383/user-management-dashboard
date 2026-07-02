@@ -1,10 +1,18 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import Button from "../common/Button";
 import { userSchema } from "../../schemas/userSchema";
 
-function UserModal({ isOpen, onClose }) {
+function UserModal({
+  isOpen,
+  onClose,
+  selectedUser,
+  addUser,
+  updateUser,
+}) {
   const {
     register,
     handleSubmit,
@@ -20,14 +28,59 @@ function UserModal({ isOpen, onClose }) {
     },
   });
 
+  useEffect(() => {
+  if (!isOpen) return;
+
+  if (selectedUser) {
+    reset({
+      firstName:
+        selectedUser.firstName ||
+        selectedUser.name?.split(" ")[0] ||
+        "",
+
+      lastName:
+        selectedUser.lastName ||
+        selectedUser.name?.split(" ").slice(1).join(" ") ||
+        "",
+
+      email: selectedUser.email || "",
+
+      department: selectedUser.department || "IT",
+    });
+  } else {
+    reset({
+      firstName: "",
+      lastName: "",
+      email: "",
+      department: "",
+    });
+  }
+}, [selectedUser, isOpen, reset]);
+
   if (!isOpen) return null;
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
+  const onSubmit = async (data) => {
+  let success = false;
+
+  if (selectedUser) {
+    success = await updateUser(selectedUser.id, data);
+  } else {
+    success = await addUser(data);
+  }
+
+  if (success) {
+    toast.success(
+      selectedUser
+        ? "User updated successfully"
+        : "User added successfully"
+    );
 
     reset();
     onClose();
-  };
+  } else {
+    toast.error("Something went wrong");
+  }
+};
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
@@ -36,8 +89,8 @@ function UserModal({ isOpen, onClose }) {
         {/* Header */}
         <div className="flex items-center justify-between border-b px-6 py-4">
           <h2 className="text-2xl font-bold">
-            Add User
-          </h2>
+  {selectedUser ? "Edit User" : "Add User"}
+</h2>
 
           <button
             onClick={onClose}
