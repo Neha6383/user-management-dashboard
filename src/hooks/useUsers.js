@@ -46,23 +46,27 @@ function useUsers() {
   }
 
   async function updateUser(id, updatedUser) {
-    try {
+  try {
+    // Only call the API for users that exist in JSONPlaceholder
+    if (id <= 10) {
       await editUser(id, updatedUser);
-
-      setUsers((prev) =>
-        prev.map((user) =>
-          user.id === id
-            ? { ...user, ...updatedUser }
-            : user
-        )
-      );
-
-      return true;
-    } catch (err) {
-      console.error(err);
-      return false;
     }
+
+    // Always update local state
+    setUsers((prev) =>
+      prev.map((user) =>
+        user.id === id
+          ? { ...user, ...updatedUser }
+          : user
+      )
+    );
+
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
   }
+}
 
   async function deleteUser(id) {
     try {
