@@ -28,25 +28,29 @@ A responsive user management application built with React 19, Vite and Tailwind 
 
 ## 📸 Screenshots
 
-### Dashboard
+### 📊 Dashboard
 
 <p align="center">
-  <img src="./screenshots/dashboard.png" alt="User Management Dashboard" width="90%">
+  <img src="./screenshots/dashboard.png"
+       alt="User Management Dashboard"
+       width="95%">
 </p>
 
-### Add / Edit User
+### ➕ Add User
 
 <p align="center">
-  <img src="./screenshots/add-user.png" alt="Add User Modal" width="75%">
+  <img src="./screenshots/add-user.png"
+       alt="Add User Modal"
+       width="80%">
 </p>
 
-### Filter & Search
+### 🔎 Filter Users
 
 <p align="center">
-  <img src="./screenshots/filter-users.png" alt="User Filtering Interface" width="75%">
+  <img src="./screenshots/filter-modal.png"
+       alt="Filter Users Modal"
+       width="80%">
 </p>
-
-> **If your actual screenshot filenames are different, replace the paths above with the exact filenames in the ****`screenshots`**** folder.**
 
 ---
 
