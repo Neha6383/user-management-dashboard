@@ -1,76 +1,123 @@
-# User Management Dashboard
+# 👥 User Management Dashboard
 
-A responsive User Management Dashboard built with React, Vite, Tailwind CSS, Axios, React Hook Form, and Zod. The application allows users to view, add, edit, delete, search, sort, filter, and paginate user records using the JSONPlaceholder REST API.
+<p align="center">
+
+<a href="https://user-management-dashboard-five-beta.vercel.app/">
+<img src="https://img.shields.io/badge/Live-Demo-2ea44f?style=for-the-badge" alt="Live Demo">
+</a>
+
+<a href="https://github.com/Neha6383/user-management-dashboard">
+<img src="https://img.shields.io/badge/Source-Code-181717?style=for-the-badge&logo=github" alt="Source Code">
+</a>
+
+</p>
+
+<p align="center">
+A responsive user management application built with React 19, Vite and Tailwind CSS, featuring CRUD operations, search, filtering, sorting, pagination and form validation.
+</p>
 
 ---
 
-## Live Demo
+## 🌐 Live Demo
 
-https://user-management-dashboard-five-beta.vercel.app/
+### 👉 [Open User Management Dashboard](https://user-management-dashboard-five-beta.vercel.app/)
+
+> **Demo note:** The application uses JSONPlaceholder as a mock REST API. Create, update and delete operations are simulated and are not permanently persisted by the API.
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
 ### Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+<p align="center">
+  <img src="./screenshots/dashboard.png" alt="User Management Dashboard" width="90%">
+</p>
 
-### Add User
+### Add / Edit User
 
-![Add User](screenshots/add-user.png)
+<p align="center">
+  <img src="./screenshots/add-user.png" alt="Add User Modal" width="75%">
+</p>
 
-### Filter Users
+### Filter & Search
 
-![Filter Users](screenshots/filter-modal.png)
+<p align="center">
+  <img src="./screenshots/filter-users.png" alt="User Filtering Interface" width="75%">
+</p>
 
-## GitHub Repository
-
-https://github.com/Neha6383/user-management-dashboard
-
----
-
-## Features
-
-- View users from JSONPlaceholder API
-- Add new users
-- Edit existing users
-- Delete users
-- Search by first name, last name, email, or department
-- Filter users
-- Sort users
-- Pagination (10, 25, 50, 100 records)
-- Client-side form validation using Zod
-- Responsive UI
-- Error handling
-- Success notifications
+> **If your actual screenshot filenames are different, replace the paths above with the exact filenames in the ****`screenshots`**** folder.**
 
 ---
 
-## Tech Stack
+## ✨ Features
 
-### Frontend
-- React 19
-- Vite
-- Tailwind CSS
+### 👥 User Management
 
-### Form Handling
-- React Hook Form
-- Zod
+* View user records from a REST API
+* Add new users
+* Edit existing users
+* Delete users
+* Responsive user table
 
-### HTTP Client
-- Axios
+### 🔎 Search & Filtering
 
-### Deployment
-- Vercel
+* Search by:
+
+  * First name
+  * Last name
+  * Email
+  * Department
+* Filter user records
+* Sort user data
+* Combine search, filtering and sorting with pagination
+
+### 📄 Pagination
+
+Supports:
+
+* 10 records per page
+* 25 records per page
+* 50 records per page
+* 100 records per page
+
+Pagination is implemented on the client side.
+
+### ✅ Form Validation
+
+User forms are validated using:
+
+* React Hook Form
+* Zod
+
+Validation currently covers:
+
+* First Name
+* Last Name
+* Email
+* Department
+
+### 🔔 User Feedback
+
+The application provides:
+
+* Success notifications
+* Error handling
+* Validation feedback
+* Responsive UI states
 
 ---
 
-## Folder Structure
+## 🧠 Engineering Highlights
 
-```
+This project was structured with maintainability and separation of concerns in mind.
+
+### Component Architecture
+
+The application separates reusable UI functionality into dedicated components:
+
+```text
 src/
-│
 ├── api/
 ├── components/
 │   ├── common/
@@ -80,7 +127,6 @@ src/
 │   ├── pagination/
 │   ├── search/
 │   └── table/
-│
 ├── constants/
 ├── hooks/
 ├── pages/
@@ -89,35 +135,141 @@ src/
 └── utils/
 ```
 
+This structure keeps UI components, API communication, validation schemas, hooks and utility logic separated instead of placing application logic in a single component.
+
 ---
 
-## Installation
+## 🏗️ Application Flow
 
-Clone the repository
+```text
+                    ┌─────────────────────┐
+                    │     React UI        │
+                    │                     │
+                    │ Dashboard / Table   │
+                    │ Search / Filter     │
+                    │ Add / Edit / Delete │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Reusable Components │
+                    │                     │
+                    │ Table / Modal       │
+                    │ Search / Filter     │
+                    │ Pagination          │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ API / Service Layer │
+                    │                     │
+                    │ Axios               │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ JSONPlaceholder API │
+                    │                     │
+                    │ /users              │
+                    └─────────────────────┘
+```
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+### Forms & Validation
+
+### API
+
+### Deployment
+
+---
+
+## 🔌 API
+
+This application consumes the **JSONPlaceholder Users API**:
+
+`https://jsonplaceholder.typicode.com/users`
+
+The API is used to simulate user CRUD operations.
+
+Because JSONPlaceholder is a mock API, changes made through the application are not permanently stored.
+
+---
+
+## ⚠️ API Limitation
+
+JSONPlaceholder simulates create, update and delete requests but does not provide persistent storage.
+
+Therefore:
+
+```text
+Add User
+   ↓
+API request succeeds
+   ↓
+User appears in UI
+   ↓
+Page refresh
+   ↓
+Mock API data is restored
+```
+
+A production implementation would replace the mock API with a persistent backend and database.
+
+---
+
+## 🧪 Validation
+
+Zod + React Hook Form are used to validate user input.
+
+Current validation covers:
+
+| Field      | Validation         |
+| ---------- | ------------------ |
+| First Name | Required           |
+| Last Name  | Required           |
+| Email      | Valid email format |
+| Department | Required           |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Neha6383/user-management-dashboard.git
 ```
 
-Navigate into the project
+### 2. Navigate into the project
 
 ```bash
 cd user-management-dashboard
 ```
 
-Install dependencies
+### 3. Install dependencies
 
 ```bash
 npm install
 ```
 
-Start the development server
+### 4. Start the development server
 
 ```bash
 npm run dev
 ```
 
-Build for production
+The application will be available at the local development URL shown by Vite.
+
+---
+
+## 📦 Production Build
+
+Create a production build with:
 
 ```bash
 npm run build
@@ -125,54 +277,112 @@ npm run build
 
 ---
 
-## API Used
+## 🧪 Testing
 
-JSONPlaceholder
+The project includes Vitest configuration for frontend testing.
 
-https://jsonplaceholder.typicode.com/users
+Run the test suite with:
 
----
+```bash
+npm run test
+```
 
-## Validation
-
-The application uses **Zod** with **React Hook Form** to validate:
-
-- First Name
-- Last Name
-- Email
-- Department
+> If the `test` script is not currently defined in `package.json`, add/configure it before publishing this command.
 
 ---
 
-## Assumptions
+## 📁 Project Structure
 
-- JSONPlaceholder simulates Create, Update, and Delete operations.
-- Since the API does not permanently store data, newly added or edited users disappear after refreshing the page.
-- Pagination is implemented on the client side.
+```text
+user-management-dashboard/
+│
+├── public/
+│
+├── screenshots/
+│
+├── src/
+│   ├── api/
+│   ├── components/
+│   │   ├── common/
+│   │   ├── filter/
+│   │   ├── layout/
+│   │   ├── modal/
+│   │   ├── pagination/
+│   │   ├── search/
+│   │   └── table/
+│   │
+│   ├── constants/
+│   ├── hooks/
+│   ├── pages/
+│   ├── schemas/
+│   ├── services/
+│   └── utils/
+│
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+├── vite.config.js
+└── vitest.config.js
+```
 
 ---
 
-## Challenges Faced
+## 🔍 Key Challenges
 
-- Handling JSONPlaceholder's mock CRUD behavior.
-- Managing different data formats between API users and newly created users.
-- Combining search, filtering, sorting, and pagination without conflicts.
-- Building reusable and modular React components.
+### 1. Combining multiple table operations
+
+Search, filtering, sorting and pagination need to work together without producing inconsistent results.
+
+### 2. Handling different user data states
+
+The application handles users returned from the API as well as users created through the UI.
+
+### 3. Mock API behavior
+
+Because JSONPlaceholder does not persist mutations, the frontend needs to handle the distinction between simulated API responses and persistent data.
+
+### 4. Component Reusability
+
+The UI was divided into reusable components for areas such as:
+
+* Tables
+* Search
+* Filtering
+* Pagination
+* Modals
+* Layout
+* Common UI elements
 
 ---
 
-## Future Improvements
+## 🔮 Future Improvements
 
-- Backend integration with persistent storage.
-- Authentication and authorization.
-- Server-side pagination.
-- Advanced filtering.
-- User profile page.
-- Dark mode.
-- Export users to CSV/PDF.
+* [ ] Replace JSONPlaceholder with a persistent backend
+* [ ] Add PostgreSQL or MongoDB persistence
+* [ ] Implement authentication
+* [ ] Add role-based authorization
+* [ ] Move pagination and filtering to the backend
+* [ ] Add user profile pages
+* [ ] Add dark mode
+* [ ] Add CSV/PDF export
+* [ ] Expand automated test coverage
+* [ ] Add CI/CD pipeline
 
 ---
 
-## Author
+## 📈 Project Focus
 
-Neha
+This project demonstrates practical experience with:
+
+`React` · `REST APIs` · `CRUD` · `Component Architecture` · `Form Validation` · `API Integration` · `Responsive UI` · `Client-side Data Processing`
+
+---
+
+## 👩‍💻 Author
+
+**Neha Sharma**
+
+Software Engineering Intern • Full-Stack Developer
+
+### Connect with me
